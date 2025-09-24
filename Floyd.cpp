@@ -8,7 +8,7 @@ int p,f,c,lst[506],a,b,t,dist[506][506],mini=INF,ans;
 int main(){
     ios::sync_with_stdio(false);
 	cin.tie(0);
-    //freopen("input.in","r",stdin);
+    //freopen("input.in","r",stdin); ska generalisera
     //freopen("input.out","w",stdout);
     
     cin>>p>>f>>c;
