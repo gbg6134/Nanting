@@ -17,7 +17,7 @@ int main(){
     //dfs to gete the connections
 
     queue<ll> Q;
-    for(int i=0;i<26;i++){
+    for(int i=0;i<n;i++){
         if(inedge[i]==0) Q.push(i);
     }
     while(!Q.empty()){
