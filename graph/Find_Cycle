@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef long long ll;
+typedef vector<ll> vi;
+typedef vector<vi> matrix;
+#define rep(i, a, b) for(int i = a; i < b; i++)
+ 
+const ll INF=99999999;
+const ll MAXN=206;
+ll n,dist[MAXN],Link[MAXN],len,t,starta,startb;
+bool vis[MAXN];
+
+
+struct node{
+    int now,next,weight;
+}edges[2*MAXN];
+
+void insert(int a,int b){
+    len++;
+    edges[len].next=Link[a];
+    edges[len].now=b;
+    Link[a]=len;
+}
+
+set<ll> already,loop;
+bool found,past;
+ll start;
+
+void dfs(ll now,ll fa){
+    if(already.find(now)!=already.end()){
+        loop.insert(now);
+        found=true;
+        start=now;
+        return;
+    }
+    already.insert(now);
+    for(int i=Link[now];i;i=edges[i].next){
+        if(edges[i].now==fa) continue;
+
+        dfs(edges[i].now,now);
+        if(found){
+            if(!past) loop.insert(now);
+            if(now==start) past=true;
+            return;
+        }
+    }
+    already.erase(now);
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cin>>t;
+    node id;
+    id.now=0;
+    id.next=0;
+
+    while(t--){
+        cin>>n>>starta>>startb;
+        already.clear();
+        loop.clear();
+        found=false;
+        past=false;
+        for(int i=0;i<=n;i++){
+            vis[i]=0;
+            edges[2*i]=id;
+            edges[2*i+1]=id;
+            Link[i]=0;
+            dist[i]=0;
+        }
+
+        for(int i=1;i<=n;i++){
+            ll x,y;
+            cin>>x>>y;
+            insert(x,y);
+            insert(y,x);
+        }
+
+        dfs(1,-1);//detext cycle
+        for(auto i:loop){
+            cout<<i<<' ';
+        }
+        cout<<'\n';
+
+    }
+}
