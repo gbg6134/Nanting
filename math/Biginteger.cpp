@@ -126,15 +126,70 @@ string Bigmul(string x,string y){// multiplication not done like this
     return ans;
 }
 
+string Bighalf(string x){
+    int s=x.size(),a[s+6];
+    int res[s+6];
+    memset(res,0,sizeof(res));
+    memset(a,0,sizeof(a));
+
+    for(int i=0;i<x.size();i++) a[i]=x[i]-'0';
+
+    for(int i=0;i<x.size();i++){
+        res[i]+=a[i]/2;
+        if(a[i]%2){
+            a[i+1]+=10;
+        }
+    }
+
+    string ans="";
+    bool first=false;
+    for(int i=0;i<s;i++){
+        if(res[i]==0&&!first) continue;
+        else{
+            ans+=res[i]+'0';
+            first=true;
+        }
+    }
+    if(ans=="") return "0";
+    return ans;
+}
+
+bool Scompare(string x,string y){
+    if(x.size()<y.size()) return true;
+    if(x.size()>y.size()) return false;
+    return x<y;
+}
+
+bool Ecompare(string x,string y){
+    if(x.size()<y.size()) return true;
+    if(x.size()>y.size()) return false;
+    return x<=y;
+}
+
+string BigMod(string x,string m){//can get Bigdiv in the same way
+    string start="0",end="1";
+    for(int i=1;i<=x.size()+6;i++) end+="0";
+
+    while(Scompare(start,end)){
+        string temp=Bigadd(end,"1");
+        string mid=Bigadd(start,Bighalf(Bigsub(temp,start)));
+        if(Ecompare(Bigmul(mid,m),x)){
+            start=mid;
+        }else{
+            end=Bigsub(mid,"1");
+        }
+    }
+    string res=Bigsub(x,Bigmul(start,m));
+    return res;
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    //freopen("test100","r",stdin);
-    //freopen("mine.txt","w",stdout);
     
     string a,b;
     cin>>a>>b;
-    string c=Bigmul(a,b);
+    string c=BigMod(a,b);
     cout<<c<<'\n';
 }
