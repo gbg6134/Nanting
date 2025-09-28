@@ -1,3 +1,4 @@
+//UPDATERA ARRAY STORLEKEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -6,7 +7,7 @@ typedef vector<ll> vi;
 typedef vector<vi> matrix;
 #define rep(i, a, b) for(int i = a; i < b; i++)
  
-const ll MAXN=200006;
+const ll MAXN=200006;//UPDATERA ARRAY STORLEKEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 int main(){
     ios_base::sync_with_stdio(false);
