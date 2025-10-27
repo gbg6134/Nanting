@@ -28,7 +28,7 @@ struct SegmentTree{
         if(l > r) return node();
         if(r < ls || l > rs) return node();
 
-        if(l <= ls && rs <= r){
+        if(ls <= l && r <= rs){
             //assign value  
 
             return seg[i];
@@ -65,4 +65,5 @@ struct SegmentTree{
         return c;
     }
 };
+
 
